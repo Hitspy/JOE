@@ -1,7 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-var prefix = "#"
- 
+var prefix = "$"
+var adminprefix = "%"
+const developers = ["409282580156907521","id"]
+
 client.on('message', message => {
     var p = message.mentions.members.first();
     var reason = message.content.split(" ").slice(2).join(' ');
