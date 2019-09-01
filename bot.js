@@ -1,13 +1,11 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-var prefix = "%"
-var adminprefix = '%'
-const developers = ["409282580156907521","id"]
-
+var prefix = "#"
+ 
 client.on('message', message => {
     var p = message.mentions.members.first();
     var reason = message.content.split(" ").slice(2).join(' ');
-    var log = message.guild.channels.find('name', 'log');
+    var log = message.guild.channels.find('name', 'warns-log');
     if(message.content.startsWith(`${prefix}warn`)){
         if(!p) return message.reply(`**منشن الشخص اول**`);
         if(!reason) return message.reply(`**حط سبب**`);
@@ -33,14 +31,14 @@ client.on('message', message => {
         message.channel.send(`${p} ${reason}`)
             message.delete();
         log.send({embed});
-        warnRoles = ['player']
+        warnRoles = ['Only Me']
     }
 });
 ///////////
 client.on('message', message => {
     var p = message.mentions.members.first();
     var reason = message.content.split(" ").slice(2).join(' ');
-    var log = message.guild.channels.find('name', 'ban');
+    var log = message.guild.channels.find('name', 'ban-log');
     if(message.content.startsWith(`${prefix}ban`)){
         if(!p) return message.reply(`**منشن الشخص**`);
         if(!reason) return message.reply(`**حط سبب**`);
@@ -138,7 +136,7 @@ client.on('message',async message => {
 ////////
 client.on('message', async message => {
  
-if(message.content.startsWith( prefix + 'رابط')) {
+if(message.content.startsWith( prefix + 'invite')) {
         let oi = message.mentions.users.first() ? message.mentions.users.first().id : message.author.id;
         let Tag = message.mentions.users.first() ? message.mentions.users.first().tag : message.author.tag;
         let Username = message.mentions.users.first() ? message.mentions.users.first().username : message.author.username;
@@ -175,12 +173,12 @@ if(message.content.startsWith( prefix + 'رابط')) {
 //////////////////////////////////
 var config = {
   events: [
-    {type: "CHANNEL_CREATE", logType: "CHANNEL_CREATE", limit: 20 , delay: 5000},
-    {type: "CHANNEL_DELETE", logType: "CHANNEL_DELETE", limit: 10, delay: 5000},
-    {type: "GUILD_MEMBER_REMOVE", logType: "MEMBER_KICK", limit: 6, delay: 5000},
-    {type: "GUILD_BAN_ADD", logType: "MEMBER_BAN_ADD", limit: 6, delay: 5000},
-    {type: "GUILD_ROLE_CREATE", logType: "ROLE_CREATE", limit: 100, delay: 5000},
-    {type: "GUILD_ROLE_DELETE", logType: "ROLE_DELETE", limit: 100, delay: 5000},
+    {type: "CHANNEL_CREATE", logType: "CHANNEL_CREATE", limit: 4 , delay: 5000},
+    {type: "CHANNEL_DELETE", logType: "CHANNEL_DELETE", limit: 4, delay: 5000},
+    {type: "GUILD_MEMBER_REMOVE", logType: "MEMBER_KICK", limit: 4, delay: 5000},
+    {type: "GUILD_BAN_ADD", logType: "MEMBER_BAN_ADD", limit: 4, delay: 5000},
+    {type: "GUILD_ROLE_CREATE", logType: "ROLE_CREATE", limit: 5, delay: 5000},
+    {type: "GUILD_ROLE_DELETE", logType: "ROLE_DELETE", limit: 4, delay: 5000},
   ]
 }
 client.on("error", (e) => console.error(e));
@@ -282,7 +280,7 @@ client.on('message', message => {
                     message.channel.sendEmbed(embed) .then(codes => {
  
                    
-                        const filter = msg => msg.content.startsWith(prefix + 'حذف');
+                        const filter = msg => msg.content.startsWith(prefix + 'close');
                         message.channel.awaitMessages(response => response.content === prefix + 'close', {
                             max: 1,
                             time: 20000,
@@ -292,7 +290,7 @@ client.on('message', message => {
                             message.channel.delete();
                         }) .catch(() => {
                             codes.delete()
-                                .then(message.channel.send('**نايس حذف**')) .then((c) => {
+                                .then(message.channel.send('**تم إلغاء العملية**')) .then((c) => {
                                     c.delete(4000);
                                 })
                                    
@@ -308,7 +306,7 @@ client.on('message', message => {
 });
 //////
 client.on("guildMemberAdd", member => {
-  client.channels.find('id', '616544011548622858').send(` **Welcome To .. Server home**  `)
+  client.channels.find('id', '616544011548622858').send(` **Welcome To .. Server**  `)
 });
 /////////
 client.on('message', msg => {
